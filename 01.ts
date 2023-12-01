@@ -1001,13 +1001,13 @@ zbjbeightfhbhcfkbhrthqhgsixthree11five
 fbfvqgvqfone5nctdcdpteighttwo
 dhfbhone4fourlgzftg`;
 
-const inputText= `two1nine
+const inputTest = `two1nine
 eightwothree
 abcone2threexyz
 xtwone3four
 4nineeightseven2
 zoneight234
-7pqrstsixteen`
+7pqrstsixteen`;
 
 const part1 = () => {
   const lines = readRawInput(inputRaw);
@@ -1038,7 +1038,7 @@ const part2 = () => {
     let tmp = line;
     let stuck = false;
     while (!stuck) {
-      let rightMostIndex = line.length;
+      let rightMostIndex = tmp.length;
       let found = "";
       for (const word of Object.keys(dict)) {
         if (tmp.includes(word) && tmp.indexOf(word) < rightMostIndex) {
@@ -1049,7 +1049,6 @@ const part2 = () => {
       if (found === "") {
         stuck = true;
       } else {
-        // @ts-ignore
         tmp = tmp.replace(found, dict[found]);
       }
     }
@@ -1067,5 +1066,31 @@ const part2 = () => {
   console.log(total);
 };
 
+// ? I oversight the question...
+const part2ButNotRTLHumanReading = () => {
+  const lines = readRawInput(inputRaw);
+  const processedLines = lines.map((line) =>
+    line
+      .replaceAll("one", "o1e")
+      .replaceAll("two", "t2o")
+      .replaceAll("three", "t3e")
+      .replaceAll("four", "f4r")
+      .replaceAll("five", "f5e")
+      .replaceAll("six", "s6x")
+      .replaceAll("seven", "s7n")
+      .replaceAll("eight", "e8t")
+      .replaceAll("nine", "n9e")
+  );
+  const arraysOfInt = processedLines.map((line) =>
+    line.split("").filter((char) => !isNaN(parseInt(char)))
+  );
+  const total = arraysOfInt.reduce(
+    (prev, curr) => prev + parseInt(`${curr.at(0)}${curr.at(-1)}`),
+    0
+  );
+  console.log(total);
+};
+
 part1();
 part2();
+part2ButNotRTLHumanReading();
