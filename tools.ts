@@ -1,0 +1,1 @@
+export const readRawInput = (raw: string) => raw.split("\n")
