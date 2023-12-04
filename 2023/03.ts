@@ -1,3 +1,5 @@
+import { readRawInput } from "./tools";
+
 const testInput = `467..114..
 ...*......
 ..35..633.
@@ -10,7 +12,7 @@ const testInput = `467..114..
 .664.598..`;
 
 const load = (input: string) => {
-  return input.split("\n").map((line) => line.split(""));
+  return readRawInput(input).map((line) => line.split(""));
 };
 
 const get = (input: string[][], x: number, y: number) => {
@@ -50,19 +52,23 @@ const getAdjacent = (input: string[][], x, y) => {
 };
 
 const count = (input: string[][]) => {
-    let c = 0
-    for (let i = 0; i < input.length; i++) {
-      for (let j = 0; j < input[i].length; j++) {
-        const x = parseInt(input[i][j])
-        if (isNaN(x)) {
-            continue
-        } else if (getAdjacent(input, i, j).some(a => a !== "." && a !== "OUT" && isNaN(parseInt(a)))) {
-            c += x
-        }
+  let c = 0;
+  for (let i = 0; i < input.length; i++) {
+    for (let j = 0; j < input[i].length; j++) {
+      const x = parseInt(input[i][j]);
+      if (isNaN(x)) {
+        continue;
+      } else if (
+        getAdjacent(input, i, j).some(
+          (a) => a !== "." && a !== "OUT" && isNaN(parseInt(a))
+        )
+      ) {
+        c += x;
       }
     }
-    return c
-  };
+  }
+  return c;
+};
 
 const data = load(testInput);
 print(data);
