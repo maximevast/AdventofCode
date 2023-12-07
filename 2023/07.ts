@@ -61,11 +61,7 @@ const getHandType = (cards: string[]) => {
 const rounds = lines
   .map((line) => {
     const parts = line.split(" ");
-    const hand = parts[0]
-      .split("")
-      .sort(
-        (a, b) => orderedCardLabels.indexOf(a) - orderedCardLabels.indexOf(b)
-      );
+    const hand = parts[0].split("");
     return {
       hand,
       handType: getHandType(hand),
